@@ -6,13 +6,10 @@ const bcrypt = require('bcrypt');
 const _ = require('underscore');
 
 const Usuario = require('../models/usuario');
-const verificarToken = require('../middlewares/auth');
+const {verificarToken, verificarToken_Admin} = require('../middlewares/auth');
 
 app.get('/usuario', verificarToken, (req, res)=>{
 
-    return res.json({
-        usuario: req.usuario
-    })
 
     let desde = req.query.desde || 0;
     let hasta = req.query.hasta || 5;
@@ -40,7 +37,8 @@ app.get('/usuario', verificarToken, (req, res)=>{
         })
 })
 
-app.post('/usuario', (req, res)=>{
+app.post('/usuario', [verificarToken, verificarToken_Admin], (req, res)=>{
+    
     let {nombre, email, password, role} = req.body;
 
     let usuario = new Usuario({
@@ -66,7 +64,7 @@ app.post('/usuario', (req, res)=>{
 });
 
 
-app.put('/usuario/:id', verificarToken, (req, res)=>{
+app.put('/usuario/:id', [verificarToken, verificarToken_Admin], (req, res)=>{
 
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre',  'email', 'img', 'role', 'estado']);
@@ -85,7 +83,7 @@ app.put('/usuario/:id', verificarToken, (req, res)=>{
     })
 })
 
-app.delete('/usuario/:id', verificarToken, (req, res )=>{
+app.delete('/usuario/:id', [verificarToken, verificarToken_Admin], (req, res )=>{
     let id = req.params.id;
     //Oculto el usuario pero no borro el usuario fisico/registro de la db
     Usuario.findByIdAndUpdate(id, {estado: false}, {new: true}, (err, usuarioDB)=>{

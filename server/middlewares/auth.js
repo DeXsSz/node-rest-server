@@ -14,5 +14,22 @@ const  verificarToken = (req, res, next)=>{
     })
     // res.json({token});
 };
+const verificarToken_Admin = (req, res, next)=> {
+    let usuario = req.usuario;
 
-module.exports = verificarToken;
+    if(usuario.role === "ADMIN_ROLE") {
+        next();
+    }else{
+        return res.json({
+            ok: false,
+            err: {
+                message: 'El usuario no tiene rol de admin'
+            }
+        })
+    }
+} 
+
+module.exports ={ 
+    verificarToken,
+    verificarToken_Admin
+};
