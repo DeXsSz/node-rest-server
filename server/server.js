@@ -8,11 +8,12 @@ const bodyParser = require('body-parser');
 const colors = require('colors');
 
 
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.use(require('./routes/usuario'));
-
+//  Config global of routes
+app.use(require('./routes/index'));
 
 mongoose.connect(process.env.URLDB, (err)=> {
     
@@ -20,6 +21,8 @@ mongoose.connect(process.env.URLDB, (err)=> {
     
     console.log('DATABASE Online'.green)
 });
+
+
 app.listen(process.env.PORT, (err)=> {
     console.log(`Escuchando el puerto: ${process.env.PORT}`)
 })

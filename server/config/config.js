@@ -5,7 +5,6 @@ process.env.PORT = process.env.PORT || 3000;
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 //DATABASE
-
 let urlDB;
 
 if(process.env.NODE_ENV === 'dev'){
@@ -13,8 +12,10 @@ if(process.env.NODE_ENV === 'dev'){
     }else{
     urlDB = process.env.MONGO_URI;
 }
-/// pass and username of database of mongodb Atlas
+process.env.URLDB = urlDB;
 
-
-
-process.env.URLDB = urlDB
+//Vencimiento de token
+//60 segundos, 60 minutos, 24 horas, 30 dias = equivalente a 30 dias 
+process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30
+//SEED de auth//
+process.env.SEED_AUTH = process.env.SEED_AUTH || 'este-es-el-seed-de-desarrollo';
