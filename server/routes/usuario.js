@@ -40,7 +40,7 @@ app.get('/usuario', verificarToken, (req, res)=>{
         })
 })
 
-app.post('/usuario', verificarToken, (req, res)=>{
+app.post('/usuario', (req, res)=>{
     let {nombre, email, password, role} = req.body;
 
     let usuario = new Usuario({
