@@ -16,6 +16,10 @@ process.env.URLDB = urlDB;
 
 //Vencimiento de token
 //60 segundos, 60 minutos, 24 horas, 30 dias = equivalente a 30 dias 
-process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30
-//SEED de auth//
+process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
+//SEED de auth
 process.env.SEED_AUTH = process.env.SEED_AUTH || 'este-es-el-seed-de-desarrollo';
+
+//client-id of google
+
+process.env.CLIENT_ID = process.env.CLIENT_ID  || "513184343851-qrc7e84usjp3qd7irvkhukl59g3q27q6.apps.googleusercontent.com";

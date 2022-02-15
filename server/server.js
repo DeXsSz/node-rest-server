@@ -3,6 +3,7 @@ require('./config/config');
 const  express = require('express');
 const  mongoose = require('mongoose');
 const app = express();
+const path = require('path');
 
 const bodyParser = require('body-parser');
 const colors = require('colors');
@@ -14,6 +15,7 @@ app.use(bodyParser.json())
 
 //  Config global of routes
 app.use(require('./routes/index'));
+app.use(express.static(path.resolve(__dirname, '../public')));
 
 mongoose.connect(process.env.URLDB, (err)=> {
     
