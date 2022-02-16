@@ -116,7 +116,7 @@ app.use('/google', async (req, res)=> {
                     ok: true,
                     usuario: usuarioDB,
                     token: token
-                })
+                });
             });
         }
     });
