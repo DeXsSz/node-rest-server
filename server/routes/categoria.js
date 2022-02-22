@@ -43,7 +43,7 @@ app.get('/categoria/:id', (req, res)=>{
     })
 });
 app.post('/categoria', [verificarToken, verificarToken_Admin], (req, res)=>{
-
+    
     let categoria = new Categoria({
         descripcion: req.body.descripcion,
         usuario: req.usuario._id
